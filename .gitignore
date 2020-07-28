@@ -2,4 +2,6 @@
 .idea
 .env
 
+.docker/data/
+
 *.egg-info
