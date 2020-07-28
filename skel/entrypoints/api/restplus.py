@@ -6,9 +6,9 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from skel.configurations.logger import log
 
-api = Api(version='1.0', title='Auth API',
+api = Api(version='1.0', title='Skeleton API',
           doc='/docs',
-          description='Authentication API')
+          description='Skeleton API')
 
 
 @api.errorhandler
