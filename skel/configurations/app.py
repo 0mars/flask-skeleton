@@ -34,8 +34,6 @@ def configure_extensions(flask_app, cli):
         migrate.init_app(flask_app, db)
 
 
-
-
 def register_blueprints(flask_app):
     """register all blueprints for application
     """
@@ -48,14 +46,14 @@ def register_blueprints(flask_app):
         flask_app.blueprints[blueprint.name] = blueprint
 
 
-if __name__ == '__main__':
+def main():
     app = create_app(False, True)
-
 
     def has_no_empty_params(rule):
         defaults = rule.defaults if rule.defaults is not None else ()
         arguments = rule.arguments if rule.arguments is not None else ()
         return len(defaults) >= len(arguments)
+
     @app.route("/all-routes")
     def all_routes():
         from flask import url_for, make_response, jsonify
@@ -65,4 +63,10 @@ if __name__ == '__main__':
                 url = url_for(rule.endpoint, **(rule.defaults or {}))
                 links.append((url, rule.endpoint))
         return make_response((jsonify(links), 200))
+
     app.run(host='0.0.0.0', port=8888)
+    return app
+
+
+if __name__ == '__main__':
+    app = main()
